@@ -21,6 +21,19 @@ class UserProfileViewSet(viewsets.ModelViewSet):
                 {"detail": "UserProfile already exists for this user."}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        suggested_books = self.get_suggested_books(instance)
+        response_data = serializer.data
+        response_data['suggested_books'] = suggested_books
+        return Response(response_data)
+    
+    def get_suggested_books(self, user_profile):
+        suggested_books = Book.objects.exclude(id__in=user_profile.favorite_books.values_list('id', flat=True))[:5]
+        return [1, 2, 3]
+    
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()

@@ -3,11 +3,12 @@ from .models import Author, Book, UserProfile
 from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError, APIException
 
+DEFAULT_FAVORITE_BOOKS_MAX = 20
+
 class UnprocessableEntity(APIException):
     status_code = 422
     default_detail = 'Invalid input.'
     default_code = 'unprocessable_entity'
-
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,9 +57,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return obj.user.username
 
     def validate(self, data):
+
         user = self.context['request'].user
         if UserProfile.objects.filter(user=user).exists():
             raise serializers.ValidationError("UserProfile already exists for this user.")
+        
+        favorite_books = self.initial_data.get('favorite_books', [])
+        if len(favorite_books) > DEFAULT_FAVORITE_BOOKS_MAX:
+            raise serializers.ValidationError(f"You cannot have more than {DEFAULT_FAVORITE_BOOKS_MAX} favorite books.")
+
         return data
 
     def create(self, validated_data):
