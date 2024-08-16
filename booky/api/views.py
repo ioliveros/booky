@@ -13,6 +13,15 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except IntegrityError as e: 
+            return Response(
+                {"detail": "UserProfile already exists for this user."}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
@@ -26,7 +35,7 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = (SearchFilter,)
-    search_fields = ('title', 'author__name')
+    search_fields = ('title', 'description', 'author__name')
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
