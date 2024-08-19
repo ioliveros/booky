@@ -86,14 +86,13 @@ curl --location 'http://localhost:8000/api/books/' \
 ---
 #### Running Flask (recommender microservice) 
 
-#### NOTE: 
-there are pre-requisites to run the recommender service, you need to have the ff. metadata
+NOTE: there are pre-requisites to run the recommender service, you need to have the ff. metadata
 ```bash
 knn_model.pkl
 mlb.pkl
 books.json
 ```
-
+Runnin the service
 ```bash
 cd reco
 pip install > requirements.pip
