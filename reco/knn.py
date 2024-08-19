@@ -7,7 +7,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.neighbors import NearestNeighbors
 
-
 df_books = pd.read_json('books.json', orient='records', lines=True)
 filtered_df_books = df_books[['id', 'title', 'author_id', 'author_name', 'author_id', 'average_rating', 'shelves']]
 filtered_df_books.rename(columns={'average_rating': 'rating', 'shelves': 'genre'}, inplace=True)
@@ -42,5 +41,5 @@ print('done training')
 with open('knn_model.pkl', 'wb') as f:
     pickle.dump(knn, f)
 
-# with open('mlb.pkl', 'wb') as f:
-#     pickle.dump(mlb, f)
+with open('mlb.pkl', 'wb') as f:
+    pickle.dump(mlb, f)

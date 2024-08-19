@@ -11,7 +11,7 @@ It uses a naive approach of `KNN` implementation and was trained from the [large
 
 ----
 #### How did I train the model?
-simple, I used the `book.json` dataset and trimmed the data on google colab [here](https://www.kaggle.com/code/ioliveros/book-recommender-genre)
+simple, I used the `books.json` dataset and trimmed the data on google colab [here](https://www.kaggle.com/code/ioliveros/book-recommender-genre) or just refer to [this](https://github.com/ioliveros/booky/blob/main/reco/knn.py) code
 
 To train from the given data, I fit the training to just two features 
 `Genres` - used `MultiLabelBinarizer` to convert the list of genres for each book into a binary feature vector, and then `Average Rating` -  (thanks ChatGPT!)
