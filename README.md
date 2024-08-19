@@ -20,20 +20,15 @@ To train from the given data, I fit the training to just two features
 #### Running Django (Main API)
 
 ```bash
+cd booky
 pip install > requirements.pip
 python3 -m venv env
 source env/bin/activate
-
 python3 manage.py runserver
 ```
 django server
 ```
 ❯ python manage.py runserver
-Watching for file changes with StatReloader
-Performing system checks...
-System check identified no issues (0 silenced).
-August 19, 2024 - 19:01:24
-Django version 4.2.15, using settings 'booky.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
@@ -50,7 +45,10 @@ books.json
 ```
 
 ```bash
+cd reco
 pip install > requirements.pip
+python3 -m venv env
+source env/bin/activate
 ```
 If all is good, just do `flask run` and you should be good
 
