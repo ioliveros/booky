@@ -39,6 +39,41 @@ DB Schema is straightforward, I used 3 additional entity tables-- Authors, Books
 ![Screen Shot 2024-08-20 at 3 22 18 AM](https://github.com/user-attachments/assets/466e369f-2da2-428c-9653-ba33510d5fba)
 
 
+#### How to obtain a JWT token?
+
+Register
+```bash
+curl --location 'http://localhost:8000/api/register' \
+--form 'username="ioliveros"' \
+--form 'email="foo@bar.com"' \
+--form 'password="xxxxx"' \
+--form 'first_name="Ian"' \
+--form 'last_name="Dev"'
+```
+Get Access Token
+```bash
+curl --location 'http://localhost:8000/api/token/' \
+--form 'username="ioliveros"' \
+--form 'password="xxxxx"' \
+--form 'email="foo@bar.com""'
+```
+You should be able to get a `refresh` and `access` token
+```bash
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx"
+}
+```
+How do I used the token?
+```
+curl --location 'http://localhost:8000/api/books/' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
+--form 'title="Harry Potter and the Prisoner of Azkaban"' \
+--form 'author="1"' \
+--form 'description="Harry Potter and the Prisoner of Azkaban is a fantasy novel written by British author J. K. Rowling and is the third in the Harry Potter series. The book follows Harry Potter, a young wizard, in his third year at Hogwarts School of Witchcraft and Wizardry. Along with friends Ronald Weasley and Hermione Granger, Harry investigates Sirius Black, an escaped prisoner from Azkaban, the wizard prison, believed to be one of Lord Voldemort'\''s old allies."' \
+--form 'publish_date="1999-07-08"'
+```
+
 ---
 #### Running Flask (recommender microservice) 
 
