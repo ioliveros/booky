@@ -32,6 +32,9 @@ django server
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
+ORM Schema
+![Screen Shot 2024-08-20 at 3 22 18 AM](https://github.com/user-attachments/assets/466e369f-2da2-428c-9653-ba33510d5fba)
+
 
 ---
 #### Running Flask (recommender microservice) 
