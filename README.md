@@ -76,9 +76,9 @@ Add Book
 ```
 curl --location 'http://localhost:8000/api/books/' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
---form 'title="Harry Potter and the Prisoner of Azkaban"' \
+--form 'title="Digital Fortress"' \
 --form 'author="1"' \
---form 'description="Harry Potter and the Prisoner of Azkaban is a fantasy novel written by British author J. K. Rowling and is the third in the Harry Potter series. The book follows Harry Potter, a young wizard, in his third year at Hogwarts School of Witchcraft and Wizardry. Along with friends Ronald Weasley and Hermione Granger, Harry investigates Sirius Black, an escaped prisoner from Azkaban, the wizard prison, believed to be one of Lord Voldemort'\''s old allies."' \
+--form 'description="The book explores the theme of government surveillance of electronically stored information on the private lives of citizens, and the possible civil liberties and ethical implications of using such technology."' \
 --form 'publish_date="1999-07-08"'
 ```
 
