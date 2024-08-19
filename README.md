@@ -64,7 +64,7 @@ You should be able to get a `refresh` and `access` token
     "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx"
 }
 ```
-How do I used the token?
+How to use the token?
 ```
 curl --location 'http://localhost:8000/api/books/' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
