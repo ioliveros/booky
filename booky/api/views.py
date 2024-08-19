@@ -7,6 +7,10 @@ from django.contrib.auth.models import User
 from .models import Author, Book, UserProfile
 from .serializers import AuthorSerializer, BookSerializer, UserProfileSerializer, RegisterSerializer
 
+import requests
+import json
+
+RECOMMENDER_SERVICE = 'http://127.0.0.1:5000/recommend'
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
@@ -25,15 +29,19 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        suggested_books = self.get_suggested_books(instance)
+        suggested_books = self.get_suggested_books(instance, serializer)
         response_data = serializer.data
         response_data['suggested_books'] = suggested_books
         return Response(response_data)
     
-    def get_suggested_books(self, user_profile):
-        suggested_books = Book.objects.exclude(id__in=user_profile.favorite_books.values_list('id', flat=True))[:5]
-        return [1, 2, 3]
-    
+    def get_suggested_books(self, instance, serializer):
+        genres = [item['genre'].lower() for item in serializer.data['favorite_books']]
+        titles = [item['title'].lower() for item in serializer.data['favorite_books']]
+        pick_title = titles[0] 
+        with requests.Session() as client:
+            payload = json.dumps({"genres": genres, "title": pick_title})
+            response = client.post(RECOMMENDER_SERVICE, headers={'content-type': 'application/json'}, data=payload)
+        return response.json()
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()

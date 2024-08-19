@@ -5,7 +5,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-books_df = pd.read_json('books.json', orient='records', lines=True)
+books_df = pd.read_json('dataset/books.json', orient='records', lines=True)
 
 with open('models/mlb.pkl', 'rb') as f:
     mlb = pickle.load(f)
@@ -31,13 +31,10 @@ def recommend():
     distances, indices = knn.kneighbors(query_vector)
     recommended_books = books_df.iloc[indices[0]]
     
-    # Exclude books with the provided title
     if query_title:
         recommended_books = recommended_books[recommended_books['title'] != query_title]
     
-    # Convert to list of dictionaries
     result = recommended_books[['title', 'average_rating', 'author_name']].to_dict(orient='records')
-    
     return jsonify(result)
 
 
