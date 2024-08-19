@@ -26,13 +26,16 @@ python3 -m venv env
 source env/bin/activate
 python3 manage.py runserver
 ```
-django server
+#### django server
 ```
 ❯ python manage.py runserver
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
-ORM Schema
+--- 
+#### ORM Schema and Authentication
+DB Schema is straightforward, we used 3 entity tables, Authors, Books and UserProfile. I reused the built-in User and `rest_framework_simplejwt` for JWT token implementation
+
 ![Screen Shot 2024-08-20 at 3 22 18 AM](https://github.com/user-attachments/assets/466e369f-2da2-428c-9653-ba33510d5fba)
 
 
