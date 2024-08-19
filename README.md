@@ -65,6 +65,14 @@ You should be able to get a `refresh` and `access` token
 }
 ```
 How to use the token?
+Add Author
+```
+curl --location 'http://localhost:8000/api/authors/' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
+--form 'name="Dan Brown"' \
+--form 'biography="American author best known for his thriller novels, including the Robert Langdon novels Angels & Demons (2000), The Da Vinci Code (2003), The Lost Symbol (2009), Inferno (2013), and Origin (2017). His novels are treasure hunts that usually take place over a period of 24 hours."'
+```
+Add Book
 ```
 curl --location 'http://localhost:8000/api/books/' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
