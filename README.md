@@ -109,3 +109,46 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
 Press CTRL+C to quit
 ```
+Test recommender service
+```bash
+curl --location 'http://127.0.0.1:5000/recommend' \
+--header 'Content-Type: application/json' \
+--data '{
+    "genres": [
+        "favorites",
+        "fantasy",
+        "action"
+    ],
+    "title": "Some Book Title"
+}'
+```
+Output
+```
+[
+    {
+        "author_name": "Mark Musa",
+        "average_rating": 3.67,
+        "title": "Advent at the Gates: Dante's Comedy"
+    },
+    {
+        "author_name": "Don Cupitt",
+        "average_rating": 3.67,
+        "title": "Meaning of It All in Everyday Speech"
+    },
+    {
+        "author_name": "Jeremy Mark Robinson",
+        "average_rating": 3.75,
+        "title": "Thomas Hardy And John Cowper Powys: Wessex Revisited"
+    },
+    {
+        "author_name": "Peter Boysen",
+        "average_rating": 3.79,
+        "title": "A Tale of Two Cities"
+    },
+    {
+        "author_name": "Michael W.  Smith",
+        "average_rating": 3.8,
+        "title": "Freedom"
+    }
+]
+```
