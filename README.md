@@ -78,6 +78,7 @@ curl --location 'http://localhost:8000/api/books/' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
 --form 'title="Digital Fortress"' \
 --form 'author="1"' \
+--form 'genre="thriller"' \
 --form 'description="The book explores the theme of government surveillance of electronically stored information on the private lives of citizens, and the possible civil liberties and ethical implications of using such technology."' \
 --form 'publish_date="1999-07-08"'
 ```
