@@ -43,5 +43,5 @@ print('done training')
 with open('knn_model.pkl', 'wb') as f:
     pickle.dump(knn, f)
 
-# with open('mlb.pkl', 'wb') as f:
-#     pickle.dump(mlb, f)
+with open('mlb.pkl', 'wb') as f:
+    pickle.dump(mlb, f)
