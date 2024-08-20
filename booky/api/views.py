@@ -27,21 +27,29 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             )
     
     def retrieve(self, request, *args, **kwargs):
+        
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        suggested_books = self.get_suggested_books(instance, serializer)
         response_data = serializer.data
-        response_data['suggested_books'] = suggested_books
+        
+        if request.query_params.get('reco', None) == 1:
+            suggested_books = self.get_suggested_books(instance, serializer)
+            if suggested_books:
+                response_data['suggested_books'] = suggested_books
+            else:
+                response_data['suggested_books'] = [] 
+
         return Response(response_data)
     
     def get_suggested_books(self, instance, serializer):
         genres = [item['genre'].lower() for item in serializer.data['favorite_books']]
         titles = [item['title'].lower() for item in serializer.data['favorite_books']]
-        pick_title = titles[0] 
-        with requests.Session() as client:
-            payload = json.dumps({"genres": genres, "title": pick_title})
-            response = client.post(RECOMMENDER_SERVICE, headers={'content-type': 'application/json'}, data=payload)
-        return response.json()
+        if len(titles) > 0:
+            pick_title = titles[0] 
+            with requests.Session() as client:
+                payload = json.dumps({"genres": genres, "title": pick_title})
+                response = client.post(RECOMMENDER_SERVICE, headers={'content-type': 'application/json'}, data=payload)
+            return response.json()
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
