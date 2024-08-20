@@ -7,7 +7,7 @@ It uses a naive approach of `KNN` implementation and was trained from the [large
 
 ### Overview
 
-![Screen Shot 2024-08-20 at 10 55 37 PM](https://github.com/user-attachments/assets/4b8b819e-2157-4c89-98f6-d4b3534fbe0a)
+![Screen Shot 2024-08-20 at 10 56 12 PM](https://github.com/user-attachments/assets/6a9f2c23-c466-4ca0-8c7d-7bd06a3738a3)
 
 ----
 #### How did I train the model?
