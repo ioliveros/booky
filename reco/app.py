@@ -33,8 +33,13 @@ def recommend():
     
     if query_title:
         recommended_books = recommended_books[recommended_books['title'] != query_title]
-    
-    result = recommended_books[['title', 'average_rating', 'author_name']].to_dict(orient='records')
+
+    result = recommended_books[
+        [
+            'title', 'average_rating', 'author_name', 
+            'description', 'original_publication_date', 
+         ]
+    ].to_dict(orient='records')
     return jsonify(result)
 
 
