@@ -11,7 +11,7 @@ It uses a naive approach of `KNN` implementation and was trained from the [large
 
 ----
 #### How did I train the model?
-simple, I used the `books.json` dataset and trimmed the data on google colab [here](https://www.kaggle.com/code/ioliveros/book-recommender-genre) or just refer to [this](https://github.com/ioliveros/booky/blob/main/reco/knn.py) code
+simple, I used the `books.json` dataset and trimmed the data on google colab [here](https://colab.research.google.com/#fileId=https%3A//storage.googleapis.com/kaggle-colab-exported-notebooks/book-recommender-genre-db86f289-8f8b-4e2f-819c-3bdd0065860e.ipynb%3FX-Goog-Algorithm%3DGOOG4-RSA-SHA256%26X-Goog-Credential%3Dgcp-kaggle-com%2540kaggle-161607.iam.gserviceaccount.com/20240820/auto/storage/goog4_request%26X-Goog-Date%3D20240820T120756Z%26X-Goog-Expires%3D259200%26X-Goog-SignedHeaders%3Dhost%26X-Goog-Signature%3D32e317c3a8a23ef90035f0eb204b7a3deab6b33b27c0e8e770c10957d1f13977abf2b2298c23a9af06c5ddf855ebedfb3c1081f8caa7e1ec26f262d602c7e65d353b39e316754af2ae660202ff16b0a7ab5ff45346ba201ef234eaf733b239b9be83a7657f5f65e6e0345a789ec90d7e9cf71835c63a7273a185f43bbecdd3fa1d1d9914b96d651f8f4246234bb44e8aee2b773fd3ca46a388ba39945987780a5088e525e8e45517970e5a28384a0326d4e9f65af8b609a9e88b81e8ad7974a676125837ff825d12a0f70650465667edc2970a9a38238e041bdbfcf4efad62f52500cd9468074448cdda3bfe38773d86c14a77121bb5dc2b2a600f9d83bdfe6b) or just refer to [this](https://github.com/ioliveros/booky/blob/main/reco/knn.py) code
 
 To train from the given data, I fit the training to just two features 
 `Genres` - used `MultiLabelBinarizer` to convert the list of genres for each book into a binary feature vector, and then `Average Rating` -  (thanks ChatGPT!)
