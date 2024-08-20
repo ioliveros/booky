@@ -44,7 +44,16 @@ Then you should be good to go and ready to use the BookyAPI
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
---- 
+Quick verification for DjangoAdmin
+
+Authors
+![Screen Shot 2024-08-20 at 11 17 30 PM](https://github.com/user-attachments/assets/4b8f4867-67f2-4992-b807-6498e8644be0)
+
+Books
+![Screen Shot 2024-08-20 at 11 17 45 PM](https://github.com/user-attachments/assets/35326035-2cbf-44f2-a20a-8db7f6bfed70)
+
+---
+
 #### ORM Schema and Authentication
 DB Schema is straightforward, I used 3 additional entity tables-- Authors, Books and UserProfile. I reused the built-in [auth.models.User](https://docs.djangoproject.com/en/5.1/ref/contrib/auth/) and [rest_framework_simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/) for JWToken implementation, for the CRUD operations I extended the [viewsets.ModelViewSet](https://www.django-rest-framework.org/api-guide/viewsets/) for some model, but for other just retained as-is, for straightforward implementation.
 
