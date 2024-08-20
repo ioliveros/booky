@@ -5,14 +5,21 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from .models import Author, Book, UserProfile
-from .serializers import AuthorSerializer, BookSerializer, UserProfileSerializer, RegisterSerializer
+from .serializers import AuthorSerializer, BookSerializer, UserProfileSerializer, RegisterSerializer, UserSerializer
 
 import requests
 import json
+import traceback
 
-RECOMMENDER_SERVICE = 'http://127.0.0.1:5000/recommend'
+RECOMMENDER_SERVICE = 'http://127.0.0.1:5000/suggested_books'
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
 
 class UserProfileViewSet(viewsets.ModelViewSet):
+
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
@@ -22,7 +29,10 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             return super().create(request, *args, **kwargs)
         except IntegrityError as e: 
             return Response(
-                {"detail": "UserProfile already exists for this user."}, 
+                {
+                    "detail": "UserProfile already exists for this user.",
+                    "error": traceback.format_exc()
+                }, 
                 status=status.HTTP_400_BAD_REQUEST
             )
     
@@ -31,8 +41,10 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         response_data = serializer.data
-        
-        if request.query_params.get('reco', None) == 1:
+
+        is_reco = request.query_params.get('reco', None)
+        print("is_reco >> ", is_reco)
+        if request.query_params.get('reco', None):
             suggested_books = self.get_suggested_books(instance, serializer)
             if suggested_books:
                 response_data['suggested_books'] = suggested_books

@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import pickle
 import numpy as np
 import pandas as pd
+from functools import lru_cache
 
 app = Flask(__name__)
 
@@ -13,12 +14,13 @@ with open('models/mlb.pkl', 'rb') as f:
 with open('models/knn_model.pkl', 'rb') as f:
     knn = pickle.load(f)
 
+# @lru_cache(maxsize=128)
 def create_query_vector(genres):
     query_genre_features = mlb.transform([genres])
     query_vector = np.hstack([query_genre_features, np.array([[0]])])
     return query_vector
 
-@app.route('/recommend', methods=['POST'])
+@app.route('/suggested_books', methods=['POST'])
 def recommend():
     data = request.json
     query_genres = data.get('genres', [])

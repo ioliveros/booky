@@ -58,10 +58,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
 
-        user = self.context['request'].user
-        if UserProfile.objects.filter(user=user).exists():
-            raise serializers.ValidationError("UserProfile already exists for this user.")
-        
         favorite_books = self.initial_data.get('favorite_books', [])
         if len(favorite_books) > DEFAULT_FAVORITE_BOOKS_MAX:
             raise serializers.ValidationError(f"You cannot have more than {DEFAULT_FAVORITE_BOOKS_MAX} favorite books.")
