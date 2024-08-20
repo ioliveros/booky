@@ -26,6 +26,18 @@ python3 -m venv env
 source env/bin/activate
 python3 manage.py runserver
 ```
+#### create a superadmin first
+```bash
+(booky) python manage.py createsuperuser
+```
+### populating the books and authors entities
+```bash
+cd bin/
+./create_user.sh
+./add_authors.sh
+./add_books.sh
+```
+Then you should be good to go and ready to use the BookyAPI
 #### django server
 ```
 ❯ python manage.py runserver
