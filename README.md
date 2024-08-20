@@ -1,6 +1,6 @@
 ## Booky
 ----
-booky is an app that let's you add your favorite authors and books. It has a recommendation system as you add your books to your favorite list.
+booky is an app that let's you curate your favorite authors and books. It has a recommendation system as you add your books to your favorite list.
 
 
 It uses a naive approach of `KNN` implementation and was trained from the [large books](https://www.kaggle.com/datasets/opalskies/large-books-metadata-dataset-50-mill-entries?resource=download) dataset
@@ -78,6 +78,7 @@ curl --location 'http://localhost:8000/api/books/' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2xxx' \
 --form 'title="Digital Fortress"' \
 --form 'author="1"' \
+--form 'genre="thriller"' \
 --form 'description="The book explores the theme of government surveillance of electronically stored information on the private lives of citizens, and the possible civil liberties and ethical implications of using such technology."' \
 --form 'publish_date="1999-07-08"'
 ```
@@ -85,14 +86,13 @@ curl --location 'http://localhost:8000/api/books/' \
 ---
 #### Running Flask (recommender microservice) 
 
-#### NOTE: 
-there are pre-requisites to run the recommender service, you need to have the ff. metadata
+NOTE: there are pre-requisites to run the recommender service, you need to have the ff. metadata
 ```bash
 knn_model.pkl
 mlb.pkl
 books.json
 ```
-
+Runnin the service
 ```bash
 cd reco
 pip install > requirements.pip
@@ -108,4 +108,47 @@ flask server
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
  * Running on http://127.0.0.1:5000
 Press CTRL+C to quit
+```
+Test recommender service
+```bash
+curl --location 'http://127.0.0.1:5000/recommend' \
+--header 'Content-Type: application/json' \
+--data '{
+    "genres": [
+        "favorites",
+        "fantasy",
+        "action"
+    ],
+    "title": "Some Book Title"
+}'
+```
+Output
+```
+[
+    {
+        "author_name": "Mark Musa",
+        "average_rating": 3.67,
+        "title": "Advent at the Gates: Dante's Comedy"
+    },
+    {
+        "author_name": "Don Cupitt",
+        "average_rating": 3.67,
+        "title": "Meaning of It All in Everyday Speech"
+    },
+    {
+        "author_name": "Jeremy Mark Robinson",
+        "average_rating": 3.75,
+        "title": "Thomas Hardy And John Cowper Powys: Wessex Revisited"
+    },
+    {
+        "author_name": "Peter Boysen",
+        "average_rating": 3.79,
+        "title": "A Tale of Two Cities"
+    },
+    {
+        "author_name": "Michael W.  Smith",
+        "average_rating": 3.8,
+        "title": "Freedom"
+    }
+]
 ```
