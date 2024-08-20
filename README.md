@@ -34,7 +34,7 @@ Quit the server with CONTROL-C.
 ```
 --- 
 #### ORM Schema and Authentication
-DB Schema is straightforward, I used 3 additional entity tables-- Authors, Books and UserProfile. I reused the built-in User and `rest_framework_simplejwt` for JWToken implementation
+DB Schema is straightforward, I used 3 additional entity tables-- Authors, Books and UserProfile. I reused the built-in auth.models.User and `rest_framework_simplejwt` for JWToken implementation, for the CRUD operations I extended the `viewsets.ModelViewSet` for some model, but for other just retained as-is, for straightforward implementation.
 
 ![Screen Shot 2024-08-20 at 3 22 18 AM](https://github.com/user-attachments/assets/466e369f-2da2-428c-9653-ba33510d5fba)
 
