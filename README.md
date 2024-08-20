@@ -17,7 +17,7 @@ To train from the given data, I fit the training to just two features
 `Genres` - used `MultiLabelBinarizer` to convert the list of genres for each book into a binary feature vector, and then `Average Rating` -  (thanks ChatGPT!)
 
 --- 
-#### Running Django (Main API)
+#### Running Django (Booky API)
 
 ```bash
 cd booky
@@ -84,7 +84,7 @@ curl --location 'http://localhost:8000/api/books/' \
 ```
 
 ---
-#### Running Flask (recommender microservice) 
+#### Running Flask (Reco Service) 
 
 NOTE: there are pre-requisites to run the recommender service, you need to have the ff. metadata
 ```bash
@@ -92,7 +92,7 @@ knn_model.pkl
 mlb.pkl
 books.json
 ```
-Runnin the service
+Running the service
 ```bash
 cd reco
 pip install > requirements.pip
