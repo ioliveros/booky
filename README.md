@@ -16,6 +16,23 @@ simple, I used the `books.json` dataset and trimmed the data on google colab [he
 To train from the given data, I fit the training to just two features 
 `Genres` - used `MultiLabelBinarizer` to convert the list of genres for each book into a binary feature vector, and then `Average Rating` -  (thanks ChatGPT!)
 
+*[NEW]* you can download the models trained for 1m datapoints here: [knn_model_1m](https://drive.google.com/drive/folders/11BSyEYfb37ZJB6_tD29_dbOJtb6IsNpz?usp=sharing)
+
+```bash
+cd booky
+mkdir data; mkdir data/models; mkdir data/dataset
+cp df_books_1m.json data/dataset
+cp knn_model_1m.pkl data/dataset
+cp mlb_1m.pkl data/models
+```
+#### Easier to setup via docker
+```bash
+docker-compose up -d
+---
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                    NAMES
+c142021bdd50   booky-service:latest   "python manage.py ru…"   xx minutes ago   Up xx minutes   0.0.0.0:8000->8000/tcp   booky-service
+10be28786230   reco-service:latest    "flask run --host=0.…"   xx minutes ago   Up xx minutes   0.0.0.0:8888->8888/tcp   reco-service
+```
 --- 
 #### Running Django (Booky API)
 
@@ -132,44 +149,69 @@ Press CTRL+C to quit
 ```
 Test recommender service
 ```bash
-curl --location 'http://127.0.0.1:5000/recommend' \
+curl --location 'http://127.0.0.1:8888/suggested_books' \
 --header 'Content-Type: application/json' \
 --data '{
     "genres": [
-        "favorites",
-        "fantasy",
-        "action"
+        "historical",
+        "theatre",
+        "film"
     ],
-    "title": "Some Book Title"
+    "title": "A Tale of Two Cities"
 }'
 ```
 Output
 ```
 [
     {
-        "author_name": "Mark Musa",
-        "average_rating": 3.67,
-        "title": "Advent at the Gates: Dante's Comedy"
+        "author_name": "Marlon Brando",
+        "genre": [
+            "film",
+            "historical",
+            "theatre"
+        ],
+        "rating": 3.98,
+        "title": "Las canciones que mi madre me enseñó"
     },
     {
-        "author_name": "Don Cupitt",
-        "average_rating": 3.67,
-        "title": "Meaning of It All in Everyday Speech"
+        "author_name": "Marlon Brando",
+        "genre": [
+            "film",
+            "historical",
+            "theatre"
+        ],
+        "rating": 3.98,
+        "title": "Songs My Mother Taught Me"
     },
     {
-        "author_name": "Jeremy Mark Robinson",
-        "average_rating": 3.75,
-        "title": "Thomas Hardy And John Cowper Powys: Wessex Revisited"
+        "author_name": "Marlon Brando",
+        "genre": [
+            "film",
+            "historical",
+            "theatre"
+        ],
+        "rating": 3.98,
+        "title": "Songs My Mother Taught Me"
     },
     {
-        "author_name": "Peter Boysen",
-        "average_rating": 3.79,
-        "title": "A Tale of Two Cities"
+        "author_name": "Marlon Brando",
+        "genre": [
+            "film",
+            "historical",
+            "theatre"
+        ],
+        "rating": 3.98,
+        "title": "Brando: Songs My Mother Taught Me"
     },
     {
-        "author_name": "Michael W.  Smith",
-        "average_rating": 3.8,
-        "title": "Freedom"
+        "author_name": "Marlon Brando",
+        "genre": [
+            "film",
+            "historical",
+            "theatre"
+        ],
+        "rating": 3.98,
+        "title": "Songs My Mother Taught Me"
     }
 ]
 ```
