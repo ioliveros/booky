@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  reco-service:
+    image: reco-service:latest
+    container_name: reco-service
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data/models:/app/models/
+      - ./data/dataset:/app/dataset/
+    networks:
+      - booky-network
+
+  booky-service:
+    image: booky-service:latest
+    container_name: booky-service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - reco-service
+    networks:
+      - booky-network
+
+networks:
+  booky-network:
+    driver: bridge

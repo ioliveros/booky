@@ -11,7 +11,7 @@ import requests
 import json
 import traceback
 
-RECOMMENDER_SERVICE = 'http://127.0.0.1:5000/suggested_books'
+RECOMMENDER_SERVICE = 'http://reco-service:8888/suggested_books'
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

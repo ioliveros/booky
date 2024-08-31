@@ -19,6 +19,10 @@ def create_query_vector(genres, num_features):
     query_vector = np.hstack([query_genre_features, np.zeros((1, num_features - query_genre_features.shape[1]))])
     return query_vector
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return "pong"
+
 @app.route('/suggested_books', methods=['POST'])
 def recommend():
 
@@ -50,4 +54,4 @@ def recommend():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8888, debug=True)
